@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import { useState, useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 const url = "http://localhost:8080"
@@ -14,7 +14,7 @@ interface Game {
     deck?: string;
     site_detail_url: string;
 }
-export default function searchPage() {
+export default function SearchPage() {
     const location = useLocation();
     const [results, setResults] = useState<Game[]>([]);
     const query = new URLSearchParams(location.search).get('query');
@@ -70,4 +70,4 @@ export default function searchPage() {
     );
 };
 
-export {searchPage};
+export {SearchPage};
