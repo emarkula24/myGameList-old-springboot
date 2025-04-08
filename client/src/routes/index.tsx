@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import Search from './- components/search'
+import SearchBar from './- components/SearchBar'
 import {
   QueryClient,
   QueryClientProvider,
@@ -17,7 +17,7 @@ function Index() {
     <div style={{padding: "2px"}}>
       <h3>Welcome Home!</h3>
       <QueryClientProvider client={queryClient}>
-        <Search />
+        <SearchBar />
       </QueryClientProvider>
       
     </div>
