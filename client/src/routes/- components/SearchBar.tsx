@@ -23,8 +23,8 @@ export default function SearchBar() {
 
     const fetchGames = async (searchQuery: string) => {
        
-        
-        console.info(`${url}/search?query=${searchQuery}`)
+        const encodedSearchQuery = encodeURIComponent(searchQuery)
+        console.info(`${url}/search?query=${encodedSearchQuery}`)
         await new Promise((r) => setTimeout(r, 5000))
         return axios
         .get<{ results: Game[] }>(`${url}/search?query=${searchQuery}`)
