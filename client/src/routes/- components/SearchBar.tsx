@@ -1,13 +1,14 @@
 import axios from "axios"
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-const url = "http://localhost:8080"
+const url = import.meta.env.VITE_BACKEND_URL
 import React, { useState } from "react"
 import useDebounce from "../../hooks/useDebounce"
+import styles from "./SearchBar.module.css"
 
+// Component for gamesearch function
 export default function SearchBar() {
     const [searchQuery, setSearchQuery] = useState("")
     const debouncedSearchQuery = useDebounce(searchQuery, 500);
-
 
     interface Game {
         id: number;
@@ -25,7 +26,7 @@ export default function SearchBar() {
        
         const encodedSearchQuery = encodeURIComponent(searchQuery)
         console.info(`${url}/search?query=${encodedSearchQuery}`)
-        await new Promise((r) => setTimeout(r, 5000))
+        await new Promise((r) => setTimeout(r, 500))
         return axios
         .get<{ results: Game[] }>(`${url}/search?query=${searchQuery}`)
         .then((response) => response.data.results)
@@ -49,12 +50,13 @@ export default function SearchBar() {
 
     
     return (
-        <div>
+        <div className={styles.searchResults}>
           <label>
             Search: 
             <input 
               type="text"
               name="searchInput"
+              placeholder="Search for games"
               value={searchQuery}
               onChange={handleInputChange}
             />
@@ -65,6 +67,7 @@ export default function SearchBar() {
           <div>Error: {error.message}</div>
         ): isFetched && data &&
           (
+
             <ul>
               {data.map((game) => (
                 <li key={game.id}>{game.name}</li>
