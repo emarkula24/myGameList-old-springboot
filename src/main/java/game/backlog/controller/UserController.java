@@ -1,9 +1,13 @@
-package game.backlog;
+package game.backlog.controller;
 
+import game.backlog.model.AuthenticationRequest;
+import game.backlog.model.AuthenticationResponse;
+import game.backlog.model.User;
+import game.backlog.repository.UserRepository;
+import game.backlog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +19,9 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping(path = "/register")
     public @ResponseBody String addNewUser(@RequestParam String name
@@ -35,9 +42,5 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @PostMapping("/login")
-    public String loginUser(@RequestParam String name, @RequestParam String password) {
-        return "Logged in";
-    }
 
 }

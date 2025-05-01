@@ -1,4 +1,4 @@
-package game.backlog;
+package game.backlog.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
