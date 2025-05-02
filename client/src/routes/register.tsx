@@ -10,32 +10,42 @@ export const Route = createFileRoute('/register')({
 })
 
 function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [username, setUsername] = useState('')
+  const [registerFormData, setRegisterFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+
+  });
 
   function registerUser(event: React.FormEvent) {
     event.preventDefault()
     return axios
     .post(`${url}/user/register`, {
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-      username: username,
+      email: registerFormData.email,
+      password: registerFormData.password,
+      username: registerFormData.username,
     })
   }
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setRegisterFormData({
+        ...registerFormData,
+    [event.target.name]: event.target.value
+    })
+  }
+
   return (
     <>
       <form className='formContainer'>
             <label className='Label'>Username:</label>
-            <input  onChange={(e): void =>setUsername(e.target.value)} type="username" placeholder='Enter username'/>
+            <input  name="username" value={registerFormData.username} onChange={handleChange} type="username" placeholder='Enter username'/>
             <label className='Label'>Email:</label>
-            <input onChange={(e): void =>setEmail(e.target.value)} type='email' placeholder='Enter Email'/>
+            <input name="email" value={registerFormData.email} onChange={handleChange} type='email' placeholder='Enter Email'/>
             <label className='Label'>Password:</label>
-            <input onChange={(e): void =>setPassword(e.target.value)}  type='password' placeholder='Enter Password' />
+            <input name="password" value={registerFormData.password}onChange={handleChange}  type='password' placeholder='Enter Password' />
             <label className='Label'>Confirm Password:</label>
-            <input onChange={(e): void =>setConfirmPassword(e.target.value)}  type='password' placeholder='Confirm Password' />
+            <input name="confirmPassword" value={registerFormData.confirmPassword} onChange={handleChange}  type='password' placeholder='Confirm Password' />
             <button onClick={registerUser} type='submit' >Register</button>
       </form>
     </>
