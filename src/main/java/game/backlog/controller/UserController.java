@@ -62,7 +62,7 @@ public class UserController {
             return ResponseEntity.status(500).body("User does not exist");
         }
         String accessToken = jwtUtil.createToken(username);
-        return ResponseEntity.status(400).body("User has been authenticated";
+        return ResponseEntity.status(400).body("User has been authenticated");
 
 
 
