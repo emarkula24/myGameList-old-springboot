@@ -10,10 +10,10 @@ import jakarta.persistence.Id;
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private String name;
+    private String username;
 
     private String email;
 
@@ -42,11 +42,11 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return username;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String name) {
+        this.username = username;
     }
 
     public String getEmail() {
