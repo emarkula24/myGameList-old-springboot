@@ -1,5 +1,6 @@
 package game.backlog.controller;
 
+import game.backlog.model.AuthenticationResponse;
 import game.backlog.model.User;
 import game.backlog.repository.UserRepository;
 import game.backlog.util.JwtUtil;
@@ -31,7 +32,7 @@ public class UserController {
             , @RequestParam String password) {
 
         User user = new User();
-        user.setUserName(username);
+        user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
 
@@ -45,11 +46,11 @@ public class UserController {
             , @RequestParam String password) {
 
         User user = userRepository.findByUsername(username);
-        if (user == null) {
-            return ResponseEntity.status(500).body("User does not exist");
+        if (user.getUsername() == null) {
+            return ResponseEntity.status(401).body("User does not exist");
         }
         String accessToken = jwtUtil.createToken(username);
-        return ResponseEntity.status(400).body("User has been authenticated");
+        return ResponseEntity.status(200).body(accessToken);
 
     }
     @PostMapping(path="/add") // Map ONLY POST Requests
@@ -59,7 +60,7 @@ public class UserController {
         // @RequestParam means it is a parameter from the GET or POST request
 
         User n = new User();
-        n.setUserName(name);
+        n.setUsername(name);
         n.setEmail(email);
         userRepository.save(n);
         return "Saved";

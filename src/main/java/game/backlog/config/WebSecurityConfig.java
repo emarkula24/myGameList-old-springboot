@@ -29,10 +29,13 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
+
                 .authorizeHttpRequests((authorize) ->
                         authorize.anyRequest().permitAll())
                 .sessionManagement(sessionManagementCustomizer -> sessionManagementCustomizer
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
+
 
         return http.build();
     }
