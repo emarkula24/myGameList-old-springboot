@@ -3,7 +3,6 @@ package game.backlog.service;
 import game.backlog.model.User;
 import game.backlog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserService {
 

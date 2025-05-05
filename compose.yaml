@@ -1,9 +1,9 @@
 services:
   mysql:
-    container_name: 'myGameList'
+    container_name: 'mygamelist'
     image: 'mysql:latest'
     environment:
-      - 'MYSQL_DATABASE=myGameList'
+      - 'MYSQL_DATABASE=mygamelist'
       - 'MYSQL_PASSWORD=secret'
       - 'MYSQL_ROOT_PASSWORD=verysecret'
       - 'MYSQL_USER=mies'

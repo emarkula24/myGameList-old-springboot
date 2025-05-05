@@ -1,22 +1,13 @@
 package game.backlog.controller;
 
-import game.backlog.model.AuthenticationRequest;
-import game.backlog.model.AuthenticationResponse;
 import game.backlog.model.User;
 import game.backlog.repository.UserRepository;
-import game.backlog.service.UserService;
 import game.backlog.util.JwtUtil;
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import javax.crypto.SecretKey;
-import java.util.Date;
 
 @RestController
 @RequestMapping(path="/user")
@@ -31,7 +22,7 @@ public class UserController {
     @Autowired
     private Environment environment;
 
-    @Autowired
+
     private JwtUtil jwtUtil;
 
     @PostMapping(path = "/register")
@@ -48,10 +39,6 @@ public class UserController {
         return "Saved";
     }
 
-    @GetMapping("/users")
-    public @ResponseBody Iterable<User> getAllUsers() {
-        return userRepository.findAll();
-    }
 
     @PostMapping("/login")
     public ResponseEntity <String> LoginUser(@RequestParam String username
@@ -64,8 +51,24 @@ public class UserController {
         String accessToken = jwtUtil.createToken(username);
         return ResponseEntity.status(400).body("User has been authenticated");
 
+    }
+    @PostMapping(path="/add") // Map ONLY POST Requests
+    public @ResponseBody String addNewUser (@RequestParam String name
+            , @RequestParam String email) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
 
+        User n = new User();
+        n.setUserName(name);
+        n.setEmail(email);
+        userRepository.save(n);
+        return "Saved";
+    }
 
+    @GetMapping(path="/all")
+    public @ResponseBody Iterable<User> getAllUsers() {
+        // This returns a JSON or XML with the users
+        return userRepository.findAll();
     }
 
 }
