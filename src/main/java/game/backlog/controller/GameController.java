@@ -17,6 +17,7 @@ public class GameController {
     private Environment environment;
 
 
+    
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> searchGames(@RequestParam(name = "query") String query) {
