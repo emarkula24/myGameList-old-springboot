@@ -1,5 +1,5 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
-*.rb linguist-language=Java
-*.java linguist-detectable=true
 *.ts linguist-detectable=false
+*.java linguist-language=Java
+*.java linguist-detectable=true
