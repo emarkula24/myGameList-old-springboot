@@ -1,0 +1,1 @@
+Initial version of the myGameList application I made that used Java and Springboot on the backend before switching to another languange on the backend (GoLang). The point of this repository is to showcase minor experience with spring boot/java
