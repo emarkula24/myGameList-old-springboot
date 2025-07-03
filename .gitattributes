@@ -2,3 +2,4 @@
 *.cmd text eol=crlf
 *.rb linguist-language=Java
 *.java linguist-detectable=true
+*.ts linguist-detectable=false
