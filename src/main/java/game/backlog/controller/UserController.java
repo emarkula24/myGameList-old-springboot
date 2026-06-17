@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path="/user")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    @Autowired
-    private Environment environment;
-
-
-    private JwtUtil jwtUtil;
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder, Environment environment, JwtUtil jwtUtil) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
+    }
 
     @PostMapping(path = "/register")
-    public @ResponseBody String addNewUser(@RequestParam String username
-            , @RequestParam String email
-            , @RequestParam String password) {
+    public @ResponseBody String addNewUser(
+            @RequestParam String username,
+            @RequestParam String email,
+            @RequestParam String password) {
 
         User user = new User();
         user.setUsername(username);

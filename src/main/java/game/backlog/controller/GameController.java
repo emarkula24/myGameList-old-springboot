@@ -13,11 +13,7 @@ import java.util.Map;
 @RestController
 public class GameController {
 
-    @Autowired
     private Environment environment;
-
-
-    
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> searchGames(@RequestParam(name = "query") String query) {
@@ -35,8 +31,6 @@ public class GameController {
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("error", "Failed to parse JSON"));
         }
-/*        return ResponseEntity.ok()
-                .body(result.getBody());*/
     }
     @GetMapping("/game/{guid}")
     public ResponseEntity<Map<String, Object>> searchGame(@PathVariable(name = "guid") String guid) {
